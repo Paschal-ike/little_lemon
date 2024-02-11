@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .forms import BookingForm
 from .models import *
 
@@ -21,14 +21,13 @@ def book(request):
 
 
 def menu(request):
-    menu_data = Menu.objects.all()
-    main_data = {'Menu': menu_data}
+    menu_data = Menu.objects.all().order_by('name')
+    main_data = {'menu': menu_data}
+    print("Menu Data:", menu_data) 
 
-    return render(request, 'menu.html', main_data)
+    return render(request, 'menu.html', {'menu':main_data})
+
 
 def display_menu(request, pk=None):
-    if pk:
-        menu_item = Menu.objects.get(pk=pk)
-    else:
-        menu_item = ""
+    menu_item = get_object_or_404(Menu, pk=pk) if pk else None
     return render(request, 'menu_item.html', {'menu_item': menu_item})

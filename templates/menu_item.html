@@ -9,9 +9,9 @@
          <a href="{% url 'menu' %}">Menu</a>/
          {{menu_item.name}}
       </span>
-    
+      <!--Begin row-->
       <div class="row">
-        
+         <!--Begin col-->
          <div class="column">
             <h2>
                 {{ menu_item.name }}
@@ -23,14 +23,15 @@
                 Price: ${{ menu_item.price }}.00
             </p>
          </div>
-         
+         <!--End col-->
+         <!--Begin col-->
          <div class="column">
-            <img src="/myapp/static/img/menu_items/{{menu_item.name}}.jpg" alt="{{ menu_item.name}}" />
-            /restaurant/static/img/{{menu_item.name}}.jpg
+            <img src="{% static 'img/menu_items/'|add:menu_item.name|add:'.jpg' %}" alt="{{ menu_item.name }}" />
+               
         </div>
-         
+         <!--End col-->
       </div>
-      
+      <!--End row-->
    </article>
 </section>
 {% endblock %}
